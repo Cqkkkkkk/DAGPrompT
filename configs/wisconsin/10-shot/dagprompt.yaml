@@ -1,0 +1,19 @@
+num_shot: 10
+device: 'cuda:1'
+dataset:
+  name: 'wisconsin'
+
+model:
+  backbone: 'GCN'
+  pretrain_type: 'dagprompt'
+  prompt_type: 'dagprompt'
+  num_layers: 4
+  hidden_dim: 128
+  alpha: 0.7
+  r: 16
+  adaptive_adj: True
+
+optim:
+  batch_size: 1000000
+  lr: 1e-4
+  wd: 0.0

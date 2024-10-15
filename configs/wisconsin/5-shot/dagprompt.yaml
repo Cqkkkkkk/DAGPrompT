@@ -1,0 +1,20 @@
+num_shot: 5
+device: 'cuda:1'
+dataset:
+  name: 'wisconsin'
+# {'model.hidden_dim': 256, 'model.num_layers': 4, 'model.alpha': 0.9, 'optim.lr': 0.0001, 'optim.wd': 2.5e-06, 'model.r': 8, 'model.adaptive_adj': True}
+model:
+  backbone: 'GCN'
+  pretrain_type: 'dagprompt'
+  prompt_type: 'dagprompt'
+  hidden_dim: 256
+  num_layers: 4
+  alpha: 0.9
+  r: 8
+  lg: False
+  adaptive_adj: True
+
+optim:
+  batch_size: 1000000
+  lr: 1e-4
+  wd: 2.5e-6

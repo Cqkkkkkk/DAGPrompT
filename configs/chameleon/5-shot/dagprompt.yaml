@@ -1,0 +1,53 @@
+# num_shot: 5
+# device: 'cuda:1'
+# dataset:
+#   name: 'chameleon'
+# model:
+#   hidden_dim: 128
+#   backbone: 'GCN'
+#   pretrain_type: 'dagprompt'
+#   prompt_type: 'dagprompt'
+#   num_layers: 4
+#   alpha: 0.3
+#   r: 8
+  
+# optim:
+#   batch_size: 1000000
+#   lr: 1e-3
+#   wd: 2.5e-6
+
+dataset:
+  name: chameleon
+  num_classes: -1
+  num_nodes: -1
+  root: ../datasets
+device: cuda:1
+model:
+  JK: last
+  adaptive_adj: False
+  alpha: 0.3
+  backbone: GCN
+  dropout: 0.5
+  hidden_dim: 256
+  lg: False
+  num_heads: 8
+  num_layers: 4
+  pool: mean
+  pretrain_type: dagprompt
+  prompt_type: dagprompt
+  r: 8
+model_seed: 42
+num_shot: 5
+num_split: 5
+optim:
+  batch_size: 1000000
+  epochs: 200
+  eval_batch_size: -1
+  lr: 0.001
+  patience: 200
+  wd: 2.5e-06
+pre_train_model_path: None
+repeat: 5
+seed: 42
+task: node
+val_ratio: 0.5

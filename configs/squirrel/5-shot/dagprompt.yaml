@@ -1,0 +1,16 @@
+num_shot: 5
+device: 'cuda:1'
+dataset:
+  name: 'squirrel'
+
+model:
+  hidden_dim: 128
+  backbone: 'GCN'
+  pretrain_type: 'dagprompt'
+  prompt_type: 'dagprompt'
+  num_layers: 3
+  alpha: 0.5
+optim:
+  batch_size: 1000000
+  lr: 5e-4
+  wd: 0.0

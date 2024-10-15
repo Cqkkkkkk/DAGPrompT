@@ -1,0 +1,18 @@
+num_shot: 5
+device: 'cuda:1'
+dataset:
+  name: 'cora'
+
+model:
+  backbone: 'GCN'
+  hidden_dim: 256
+  pretrain_type: 'dagprompt'
+  prompt_type: 'dagprompt'
+  num_layers: 2
+  alpha: 0.5
+  r: 16
+
+optim:
+  batch_size: 1000000
+  lr: 1e-4
+  wd: 0.0

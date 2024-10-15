@@ -1,0 +1,21 @@
+num_shot: 10
+device: 'cuda:1'
+dataset:
+  name: 'texas'
+
+model:
+  backbone: 'GCN'
+  hidden_dim: 256
+  pretrain_type: 'dagprompt'
+  prompt_type: 'dagprompt'
+  num_layers: 3
+  alpha: 0.9
+  r: 8
+  lg: true
+  adaptive_adj: True
+
+optim:
+  batch_size: 1000000
+  lr: 1e-4
+  wd: 0.0
+

@@ -1,0 +1,17 @@
+num_shot: 10
+device: 'cuda:1'
+dataset:
+  name: 'arxiv-year'
+
+model:
+  hidden_dim: 128
+  backbone: 'GCN'
+  pretrain_type: 'dagprompt'
+  prompt_type: 'dagprompt'
+  num_layers: 3
+  alpha: 0.1
+optim:
+  batch_size: 100000
+  eval_batch_size: 10000
+  lr: 5e-4
+  wd: 5e-6
