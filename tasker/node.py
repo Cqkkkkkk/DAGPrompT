@@ -125,8 +125,8 @@ class NodeTask(BaseTask):
             test_index = torch.load(os.path.join(data_dir, "test_idx.pt")).type(
                 torch.long).to(self.device)
 
-            # for all-in-one and Gprompt we use k-hop subgraph
-            if self.prompt_type in ['gprompt', 'allinone', 'gpf', 'gpf-plus', 'dagprompt']:
+
+            if self.prompt_type in ['dagprompt']:
                 graphs_list = self.load_induced_graph()
                 train_graphs = []
                 test_graphs = []
@@ -149,17 +149,7 @@ class NodeTask(BaseTask):
             cnt_wait = 0
             with tqdm(range(1, self.epochs)) as tq:
                 for epoch in tq:
-                    if self.prompt_type == 'none':
-                        loss = self.GNNtrain(self.data, train_index)
-                    elif self.prompt_type == 'gppt':
-                        loss = self.GPPTtrain(self.data, train_index)
-                    elif self.prompt_type == 'allinone':
-                        loss = self.AllInOneTrain(train_loader)
-                    elif self.prompt_type in ['gpf', 'gpf-plus']:
-                        loss = self.GPFTrain(train_loader)
-                    elif self.prompt_type == 'gprompt':
-                        loss, center = self.GpromptTrain(train_loader)
-                    elif self.prompt_type == 'dagprompt':
+                    if self.prompt_type == 'dagprompt':
                         loss, center = self.DAGPromptTrain(train_loader)
                     
                     else:

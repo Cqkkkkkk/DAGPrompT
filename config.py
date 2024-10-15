@@ -51,7 +51,7 @@ def set_cfg(cfg):
 
     cfg.dataset = CN()
 
-    cfg.dataset.name = 'pubmed'
+    cfg.dataset.name = 'texas'
 
     # Modified automatically by code, no need to set
     cfg.dataset.num_nodes = -1

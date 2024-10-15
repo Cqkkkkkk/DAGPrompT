@@ -38,51 +38,21 @@ class BaseTask:
         self.initialize_lossfn()
 
     def initialize_optimizer(self):
-        if self.prompt_type == 'none':
-            param_group = []
-            param_group.append({"params": self.gnn.parameters()})
-            param_group.append({"params": self.answering.parameters()})
-            # self.optimizer = Adam(model_param_group, lr=0.005, weight_decay=5e-4)
-            self.optimizer = Adam(param_group, lr=self.lr, weight_decay=self.wd)
-        elif self.prompt_type == 'allinone':
-            prompt_parameters = filter(
-                lambda p: p.requires_grad, self.prompt.parameters()
-            )
-            # lr=0.001, weight_decay=0.00001
-            self.prompt_optimizer = Adam(prompt_parameters, lr=self.lr, weight_decay=self.wd)
-            answer_parameters = filter(
-                lambda p: p.requires_grad, self.answering.parameters()
-            )
-            # lr=0.001, weight_decay=0.00001
-            self.answer_optimizer = Adam(answer_parameters, lr=self.lr, weight_decay=self.wd)
-        elif self.prompt_type in ['gpf', 'gpf-plus']:
-            param_group = []
-            param_group.append({"params": self.prompt.parameters()})
-            param_group.append({"params": self.answering.parameters()})
-            # lr=0.005, weight_decay=5e-4
-            self.optimizer = Adam(param_group, lr=self.lr, weight_decay=self.wd)
-        elif self.prompt_type in ['gprompt', 'gppt']:
-            # lr=0.01, weight_decay=5e-4
-            param_group = []
-            param_group.append({"params": self.prompt.parameters()})
-            # param_group.append({"params": self.gnn.parameters()})
-            self.prompt_optimizer = Adam(param_group, lr=self.lr, weight_decay=self.wd)
-        elif self.prompt_type in ['dagprompt']:
+        if self.prompt_type in ['dagprompt']:
             param_group = []
             param_group.append({"params": filter_lora_parameters(self.gnn)})
             param_group.append({"params": self.prompt.parameters()})
             param_group.append({"params": self.param_center_embeddings.parameters()})
             if self.gnn.global_edge_weights is not None:
-                # pdb.set_trace()
                 param_group.append({"params": self.gnn.global_edge_weights.parameters()})
             self.optimizer = Adam(param_group, lr=self.lr, weight_decay=self.wd)
 
         # Calculate the total number of tunable parameters
-        total_tunable_params = 0
-        for param in param_group:
-            for p in param['params']:
-                total_tunable_params += sum(p.numel() for p in p if p.requires_grad)
-        print(f'Total tunable parameters: {total_tunable_params}')
+        # total_tunable_params = 0
+        # for param in param_group:
+        #     for p in param['params']:
+        #         total_tunable_params += sum(p.numel() for p in p if p.requires_grad)
+        # print(f'Total tunable parameters: {total_tunable_params}')
         # exit()
 
     def initialize_lossfn(self):

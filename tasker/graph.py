@@ -93,7 +93,7 @@ class GraphTask(BaseTask):
                 torch.long).to(self.device)
 
 
-            if self.prompt_type in ['gprompt', 'allinone', 'gpf', 'gpf-plus', 'dagprompt']:
+            if self.prompt_type in ['dagprompt']:
                 train_dataset = self.dataset[train_index]
                 test_dataset = self.dataset[test_index]
                 train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
